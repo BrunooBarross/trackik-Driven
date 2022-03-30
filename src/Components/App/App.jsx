@@ -5,8 +5,6 @@ import Cadastro from "../Cadastro/Cadastro";
 import Habitos from "../Habitos/Habitos";
 import Hoje from "../Hoje/Hoje";
 import Historico from "../Historico/Historico"
-//import { useState } from "react";
-
 
 const App = () =>{
     return (
@@ -15,8 +13,8 @@ const App = () =>{
             <Routes>
                 <Route path="/" element={<PaginaLogin />}/>
                 <Route path="/cadastro" element={<Cadastro />}/>
-                <Route path="/habitos" element={<Habitos />}/>
                 <Route path="/hoje" element={<Hoje />}/>
+                <Route path="/habitos" element={<Habitos />}/>
                 <Route path="/historico" element={<Historico />}/>
             </Routes>
         </BrowserRouter>        

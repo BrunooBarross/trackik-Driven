@@ -1,19 +1,46 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 
 import styled from 'styled-components';
 import Container from '../Styleds-Globais/Container';
 import Logo from '../Styleds-Globais/Logo';
 import Inputs from '../Styleds-Globais/Inputs'
+import BotaoLogin from '../Styleds-Globais/BotaoLogin';
 
 const PaginaLogin = () =>{
+    const navigate = useNavigate();
+    const [loadBotao, setLoadBotao] = useState(false);
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+    const [dadosLogin, setDadosLogin] = useState({email:"", senha:""})
+    const [alerta, setAlerta] = useState(null)
+    
+    function fazerLogin(event) {
+        setLoadBotao(true);
+        event.preventDefault();
+        const requisicaoPost = axios.post(URL,{
+            email: dadosLogin.email,
+            password: dadosLogin.senha
+        });requisicaoPost.then(resposta => {
+            navigate('/hoje')
+        }); requisicaoPost.catch(err => { 
+            console.log("Olha isso aqui programador")
+            setAlerta('Email ou senha incorreto(s)');
+            setLoadBotao(false);
+        });
+    }
+
     return(
         <Container>
             <Logo src="/Assets/img/logo.png" alt="logo" />
-            <Inputs>   
-                <input type="email" name="email" placeholder='email' required/>
-                <input type="password" name="password" placeholder='senha'required/>       
+            <Inputs onSubmit={fazerLogin}>
+                <Label>{alerta}</Label>   
+                <input type="email" name="email" placeholder='email' 
+                    onChange={e => setDadosLogin({...dadosLogin,email: e.target.value})}required/>
+                <input type="password" name="password" placeholder='senha'
+                    onChange={e => setDadosLogin({...dadosLogin,senha: e.target.value})} required/> 
+                <BotaoLogin loadBotao={loadBotao}/>      
             </Inputs>
-            <Botao>Entrar</Botao>
             <Div>
                 <Link to= {`/cadastro`}>
                     <span>Não tem uma conta? Cadastre-se!</span>
@@ -22,18 +49,6 @@ const PaginaLogin = () =>{
         </Container>
     );
 }
-const Botao = styled.button`
-    width: 77%;
-    height: 45px;
-    background: #52B6FF;
-    border: none;
-    margin-top: 6px;
-
-    font-size: 20.976px;
-    line-height: 26px;
-    color: #FFFFFF;  
-    cursor: pointer;  
-`
 const Div = styled.div`
     margin-top: 25px;
     
@@ -45,6 +60,11 @@ const Div = styled.div`
         color: #52B6FF;
         cursor: pointer;
     }
+`
+const Label = styled.label`
+    font-size: 12px;
+    color: red;  
+    padding-top: 5px;
 `
 
 export default PaginaLogin;

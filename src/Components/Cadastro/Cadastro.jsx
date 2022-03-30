@@ -14,6 +14,7 @@ const Cadastro = () => {
     const [dadosCadastro, setDadosCadastro] = useState({email:"", senha:"", nome:"", imagem:""})
     const [alerta, setAlerta] = useState(null)
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+    
     function cadastrarUsuario(event) {
         event.preventDefault();
         const requisicaoPost = axios.post(URL,{
@@ -23,7 +24,7 @@ const Cadastro = () => {
             password: dadosCadastro.senha
         });requisicaoPost.then(resposta => {
             navigate('/')
-        }); requisicaoPost.catch(resposta => { 
+        }); requisicaoPost.catch(err => { 
             console.log('Se vira ai programador')
             setAlerta('Email já cadastrado');
         });
