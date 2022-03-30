@@ -12,13 +12,13 @@ const Footer = () => {
 export default Footer;
 
 const Div = styled.footer`
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    max-width: 390px;
     height: 70px;
-    position: stick;
     bottom: 0;
     background: #FFFFFF;
 
