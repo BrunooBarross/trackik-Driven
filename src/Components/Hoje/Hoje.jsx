@@ -1,6 +1,14 @@
+import Header from "../Header/Header";
+import Container from '../Styleds-Globais/Container';
+import Footer from "../Footer/Footer";
 const Hoje = () =>{
     return (
-        <div>Página Hoje</div>
+        <Container>
+            <Header />
+            <div>Página Hoje</div>
+            <Footer />
+        </Container>
+        
     );
 }
 export default Hoje;

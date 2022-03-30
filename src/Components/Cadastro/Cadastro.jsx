@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import Container from '../Styleds-Globais/Container';
+import ContainerLogin from '../Styleds-Globais/ContainerLogin';
 import Logo from '../Styleds-Globais/Logo';
 import Inputs from '../Styleds-Globais/Inputs'
 
@@ -31,7 +31,7 @@ const Cadastro = () => {
     }
 
     return(
-        <Container>
+        <ContainerLogin>
             <Logo src="/Assets/img/logo.png" alt="logo" />
             <Inputs onSubmit={cadastrarUsuario}>
                 <input type="email" name="email" placeholder='email' 
@@ -50,7 +50,7 @@ const Cadastro = () => {
                     <span>Já tem uma conta? Faça login!</span>
                 </Link>  
             </Div>  
-        </Container>
+        </ContainerLogin>
     );
 }
 

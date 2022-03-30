@@ -1,19 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import UserContext from "../Contexts/UserContext"
+import { useContext } from 'react';
 
 import styled from 'styled-components';
-import Container from '../Styleds-Globais/Container';
+import ContainerLogin from '../Styleds-Globais/ContainerLogin';
 import Logo from '../Styleds-Globais/Logo';
 import Inputs from '../Styleds-Globais/Inputs'
 import BotaoLogin from '../Styleds-Globais/BotaoLogin';
 
-const PaginaLogin = () =>{
+const PaginaLogin = ( ) =>{
     const navigate = useNavigate();
     const [loadBotao, setLoadBotao] = useState(false);
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
     const [dadosLogin, setDadosLogin] = useState({email:"", senha:""})
     const [alerta, setAlerta] = useState(null)
+
+    const { setToken } = useContext(UserContext);
     
     function fazerLogin(event) {
         setLoadBotao(true);
@@ -22,6 +26,9 @@ const PaginaLogin = () =>{
             email: dadosLogin.email,
             password: dadosLogin.senha
         });requisicaoPost.then(resposta => {
+            const {data} = resposta;
+            setToken ({token:data.token, image: data.image});
+            console.log(data)
             navigate('/hoje')
         }); requisicaoPost.catch(err => { 
             console.log("Olha isso aqui programador")
@@ -31,7 +38,7 @@ const PaginaLogin = () =>{
     }
 
     return(
-        <Container>
+        <ContainerLogin>
             <Logo src="/Assets/img/logo.png" alt="logo" />
             <Inputs onSubmit={fazerLogin}>
                 <Label>{alerta}</Label>   
@@ -46,7 +53,7 @@ const PaginaLogin = () =>{
                     <span>Não tem uma conta? Cadastre-se!</span>
                 </Link>  
             </Div>  
-        </Container>
+        </ContainerLogin>
     );
 }
 const Div = styled.div`

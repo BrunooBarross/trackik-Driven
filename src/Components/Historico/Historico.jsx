@@ -1,6 +1,13 @@
+import Header from "../Header/Header";
+import Container from '../Styleds-Globais/Container';
+
 const Historico = () =>{
     return (
-        <div>Página Histórico</div>
+        <Container>
+            <Header />
+            <div>Página Históricos</div>
+        </Container>
+        
     );
 }
 export default Historico;

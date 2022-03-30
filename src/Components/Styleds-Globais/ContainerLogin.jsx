@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const Container = styled.main`
+const ContainerLogin = styled.main`
 	width: 100%;
 	height: 100vh;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-	background: #F2F2F2;
+	background: #FFF;
+
 `;
-export default Container;
+export default ContainerLogin;
