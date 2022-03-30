@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GlobalCss from "../GlobalCss/GlobalCss";
 import PaginaLogin from "../PaginaLogin/PaginaLogin";
 import Cadastro from "../Cadastro/Cadastro";
 import Habitos from "../Habitos/Habitos";
@@ -10,6 +11,7 @@ import Historico from "../Historico/Historico"
 const App = () =>{
     return (
         <BrowserRouter>
+            <GlobalCss/>
             <Routes>
                 <Route path="/" element={<PaginaLogin />}/>
                 <Route path="/cadastro" element={<Cadastro />}/>
