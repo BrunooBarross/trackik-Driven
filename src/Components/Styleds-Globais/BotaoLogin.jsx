@@ -31,6 +31,7 @@ const BotaoLoad = styled.button`
     background: #52B6FF;
     border: none;
     margin-top: 6px;
+    opacity: 0.10;
 
     div,
     div:before,

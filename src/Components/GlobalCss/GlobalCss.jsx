@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalCss = createGlobalStyle `
-    @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600&display=swap');
     * {
         box-sizing: border-box;
         font-family: 'Lexend Deca', sans-serif;
