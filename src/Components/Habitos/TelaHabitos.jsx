@@ -14,22 +14,19 @@ import styled from 'styled-components';
 const TelaHabitos = () => {   
 
     const { token } = useContext(UserContext);
-    
+    const config = { headers: { Authorization: `Bearer ${token.token}`}}
     useEffect(() => {
-        const config = { headers: { Authorization: `Bearer ${token.token}`}}
         const requisicaoGet = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config);
         requisicaoGet.then(resposta => {
-            setBuscarHabitos(resposta.data)
+            setListarHabitos(resposta.data)
         });
         requisicaoGet.catch(err => { 
             console.log('olha isso aqui programador') 
         });
     }, [token]);
-    
 
     function criarHabito(event){
         event.preventDefault();
-        const config = { headers: { Authorization: `Bearer ${token.token}`}}
         if(idSemana.length === 0){
             return alert('Selecione pelo menos um dia da semana')
         }
@@ -38,7 +35,8 @@ const TelaHabitos = () => {
             days: idSemana
         },config);
         requisicaoPost.then(resposta => {
-            alert('deu bom')
+            const {data} = resposta;
+            setListarHabitos([data,...listarHabitos]);
             zerarInput();
         });
         requisicaoPost.catch(err => { 
@@ -57,9 +55,9 @@ const TelaHabitos = () => {
     
     const[idSemana, setIdSemana] = useState([]);
     const [mostrarInput, setMostrarInput] = useState(false);
-    const [buscarHabitos, setBuscarHabitos] = useState([]);
+    const [listarHabitos, setListarHabitos] = useState([]);
     const [nomeHabito, setNomeHabito] = useState("");
-    
+   
     function zerarInput(){
         setNomeHabito("");
         setIdSemana([]);
@@ -95,17 +93,21 @@ const TelaHabitos = () => {
                     </DivForm>   
                 </Div>  : <></>    
             }
-            { buscarHabitos.length ===0 ?  
+            { listarHabitos.length ===0 ?  
                 <Aviso>
                     <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span>
                 </Aviso> :
                 <>
-                    {buscarHabitos.map((habitos, key) =>
+                    {listarHabitos.map((habitos, key) =>
                         <Habitos 
                             key={key}
                             id={habitos.id}
                             name={habitos.name}
                             day={habitos.days}
+                            diaSemana={diaSemana}
+                            listarHabitos={listarHabitos}
+                            setListarHabitos={setListarHabitos}
+                            config ={config}
                         />
                     )}
                 </>

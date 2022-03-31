@@ -1,11 +1,30 @@
 import styled from 'styled-components';
+import axios from 'axios';
 
-const Habitos = ({id,name,days}) =>{
+const Habitos = ({ id, name, day, diaSemana, listarHabitos, setListarHabitos, config }) => {
+
+    function deletarHabito(id) {
+
+        const requisicaoDelete = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+        requisicaoDelete.then(resposta => {
+            const novoArray = listarHabitos.filter(item => item.id !== id);
+            setListarHabitos(novoArray);
+        });
+        requisicaoDelete.catch(err => {
+            alert('deu ruim')
+        });
+    }
+
     return (
         <Div>
             <DivFilho>
-                <img src="/Assets/img/lixeira.svg" alt="" />
+                <img onClick={() => deletarHabito(id)} src="/Assets/img/lixeira.svg" alt="" />
                 <span>{name}</span>
+                <div>
+                    {diaSemana.map((dia, key) =>
+                        <Dias key={key} dia={dia.idDia} day={day}>{dia.name}</Dias>
+                    )}
+                </div>
             </DivFilho>
         </Div>
     );
@@ -13,8 +32,15 @@ const Habitos = ({id,name,days}) =>{
 
 export default Habitos;
 
+function corSelecionado(dia, day) {
+    if (day.includes(dia)) {
+        return "#CFCFCF"
+    }
+    return "#FFF"
+}
+
 const Div = styled.div`
-position: relative;
+    position: relative;
     width: 90%;
     height: 91px;
     display: flex;
@@ -39,6 +65,7 @@ const DivFilho = styled.div`
         height: 15px;
         top: 11px;
         right: 10px;
+        cursor: pointer;
     }
 
     span{     
@@ -50,4 +77,30 @@ const DivFilho = styled.div`
         line-height: 25px;
         color: #666666;
     }
+
+    div{
+        display:  flex;
+
+    }
+`
+
+const Dias = styled.div`
+    background: ${(props) => corSelecionado(props.dia, props.day)};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #DBDBDB;
+    cursor: pointer;
+
+    :nth-child(n+2){
+        margin-left: 4px;
+    }
+    
 `
