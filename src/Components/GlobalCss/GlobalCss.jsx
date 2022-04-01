@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalCss = createGlobalStyle `
     * {
         box-sizing: border-box;
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Lexend Deca', sans-serif !important;
         font-style: normal;
         font-weight: 400;
     }

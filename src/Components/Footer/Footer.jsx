@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-const Footer = () => {
+const Footer = ({porcentagem}) => {
 
     const navigate = useNavigate();
 
@@ -17,7 +19,15 @@ const Footer = () => {
     return(
         <Div>
             <span onClick={()=>alternarTelas(1)}>Hábitos</span>
-            <div onClick={()=>alternarTelas(2)}><h3>Hoje</h3></div>
+            <div onClick={()=>alternarTelas(2)}>
+                <CircularProgressbar value={porcentagem} text={`Hoje`} background backgroundPadding={6}
+                    styles={buildStyles({
+                        backgroundColor: "#3e98c7",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                    })}/>
+            </div>
             <span onClick={()=>alternarTelas(3)}>Histórico</span>
         </Div>
     );

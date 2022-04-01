@@ -14,20 +14,23 @@ import ListaHoje from './ListaHoje';
 const PaginaHoje = () =>{
     const[listarHoje, setListarHoje] = useState([])
     const[monitoraCheck, setMonitoraCheck] = useState(false)
+    let[porcentagem, setPorcentagem] = useState(0)
     const { token } = useContext(UserContext);
-    
+
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token.token}`}}
         const requisicaoGet = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,config);
         requisicaoGet.then(resposta => {
            const {data} = resposta;
+           const realizadosDia = data.filter(item => item.done === true);
+           setPorcentagem((realizadosDia.length * 100) / data.length)
            setListarHoje(data);
         });
         requisicaoGet.catch(err => { 
             
         });
     }, [monitoraCheck,token]);
-    dayjs.locale('pt-br')
+
     return (
         <Container>
             <Header />
@@ -50,7 +53,7 @@ const PaginaHoje = () =>{
                             setMonitoraCheck={setMonitoraCheck}
                         />)}
                 </HabitosHoje>
-            <Footer />
+            <Footer porcentagem={porcentagem} />
         </Container>
         
     );
