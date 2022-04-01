@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import UserContext from "../Contexts/UserContext"
+import { useContext } from 'react';
 
-const Footer = ({porcentagem}) => {
+const Footer = () => {
+
+    const { porcentagem} = useContext(UserContext);
 
     const navigate = useNavigate();
 

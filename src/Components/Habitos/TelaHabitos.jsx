@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserContext from "../Contexts/UserContext"
 import { useContext } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
 
 import Header from "../Header/Header";
 import Container from '../Styleds-Globais/Container';
@@ -15,6 +16,7 @@ const TelaHabitos = () => {
 
     const { token } = useContext(UserContext);
     const config = { headers: { Authorization: `Bearer ${token.token}`}}
+
     useEffect(() => {
         const requisicaoGet = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config);
         requisicaoGet.then(resposta => {
@@ -27,6 +29,7 @@ const TelaHabitos = () => {
 
     function criarHabito(event){
         event.preventDefault();
+        setLoadBotao(true);
         if(idSemana.length === 0){
             return alert('Selecione pelo menos um dia da semana')
         }
@@ -37,9 +40,11 @@ const TelaHabitos = () => {
         requisicaoPost.then(resposta => {
             const {data} = resposta;
             setListarHabitos([data,...listarHabitos]);
+            setLoadBotao(false);
             zerarInput();
         });
         requisicaoPost.catch(err => { 
+            setLoadBotao(false);
             console.log('Olha isso aqui programador')
         }); 
     }
@@ -57,6 +62,7 @@ const TelaHabitos = () => {
     const [mostrarInput, setMostrarInput] = useState(false);
     const [listarHabitos, setListarHabitos] = useState([]);
     const [nomeHabito, setNomeHabito] = useState("");
+    const [loadBotao, setLoadBotao] = useState(false)
    
     function zerarInput(){
         setNomeHabito("");
@@ -75,7 +81,8 @@ const TelaHabitos = () => {
                 <Div> 
                     <DivForm onSubmit={criarHabito}>
                         <input type="text" name="text" placeholder="nome do habito" 
-                            onChange={e => setNomeHabito(e.target.value)} required/>
+                            onChange={e => setNomeHabito(e.target.value)} 
+                            disabled={loadBotao ? true : false}required/>
                             <Dias>
                                 {diaSemana.map((dia, key) =>
                                     <DiaSemana
@@ -86,9 +93,12 @@ const TelaHabitos = () => {
                                         setIdSemana={setIdSemana}
                                     />)}
                             </Dias>
-                        <Botoes>
+                        <Botoes loadBotao={loadBotao}>
                             <button onClick={()=>zerarInput()}>Cancelar</button>
-                            <button type='submit'>Salvar</button>
+                            {loadBotao ? 
+                                <button><ThreeDots color="#fff" height={10} /></button> :
+                                <button type='submit'>Salvar</button>
+                            } 
                         </Botoes>
                     </DivForm>   
                 </Div>  : <></>    
@@ -201,10 +211,14 @@ const Botoes = styled.div`
         cursor: pointer;
         width: 84px;
         height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 4.63636px;
         border: none;
         font-size: 15.976px;
         line-height: 20px;
+        opacity: ${props => props.loadBotao ? 0.7 : 1};
     }
     button:nth-child(1){
         background: #FFF;

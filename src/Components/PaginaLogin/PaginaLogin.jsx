@@ -43,9 +43,11 @@ const PaginaLogin = ( ) =>{
             <Inputs onSubmit={fazerLogin}>
                 <Label>{alerta}</Label>   
                 <input type="email" name="email" placeholder='email' 
-                    onChange={e => setDadosLogin({...dadosLogin,email: e.target.value})}required/>
+                    onChange={e => setDadosLogin({...dadosLogin,email: e.target.value})}
+                    disabled={loadBotao ? true : false} required/>
                 <input type="password" name="password" placeholder='senha'
-                    onChange={e => setDadosLogin({...dadosLogin,senha: e.target.value})} required/> 
+                    onChange={e => setDadosLogin({...dadosLogin,senha: e.target.value})} 
+                    disabled={loadBotao ? true : false} required/> 
                 <BotaoLogin loadBotao={loadBotao}/>      
             </Inputs>
             <Div>

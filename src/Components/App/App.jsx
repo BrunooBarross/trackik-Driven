@@ -11,9 +11,10 @@ import Historico from "../Historico/Historico"
 
 
 const App = () =>{
-    const [token, setToken] = useState(null)
+    const [token, setToken] = useState(null);
+    let[porcentagem, setPorcentagem] = useState(0);
     return (
-        <UserContext.Provider value={{token, setToken}}>
+        <UserContext.Provider value={{token, setToken,porcentagem,setPorcentagem}}>
             <BrowserRouter>
                 <GlobalCss/>
                 <Routes>

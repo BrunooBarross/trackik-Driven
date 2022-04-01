@@ -14,8 +14,7 @@ import ListaHoje from './ListaHoje';
 const PaginaHoje = () =>{
     const[listarHoje, setListarHoje] = useState([])
     const[monitoraCheck, setMonitoraCheck] = useState(false)
-    let[porcentagem, setPorcentagem] = useState(0)
-    const { token } = useContext(UserContext);
+    const { token, setPorcentagem } = useContext(UserContext);
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token.token}`}}
@@ -53,7 +52,7 @@ const PaginaHoje = () =>{
                             setMonitoraCheck={setMonitoraCheck}
                         />)}
                 </HabitosHoje>
-            <Footer porcentagem={porcentagem} />
+            <Footer />
         </Container>
         
     );
