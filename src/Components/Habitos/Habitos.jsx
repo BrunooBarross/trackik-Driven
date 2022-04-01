@@ -4,15 +4,17 @@ import axios from 'axios';
 const Habitos = ({ id, name, day, diaSemana, listarHabitos, setListarHabitos, config }) => {
 
     function deletarHabito(id) {
-
-        const requisicaoDelete = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
-        requisicaoDelete.then(resposta => {
-            const novoArray = listarHabitos.filter(item => item.id !== id);
-            setListarHabitos(novoArray);
-        });
-        requisicaoDelete.catch(err => {
-            alert('deu ruim')
-        });
+        let dialog = window.confirm("Deseja realmente excluir esse hábito?");
+        if (dialog) {
+            const requisicaoDelete = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
+            requisicaoDelete.then(resposta => {
+                const novoArray = listarHabitos.filter(item => item.id !== id);
+                setListarHabitos(novoArray);
+            });
+            requisicaoDelete.catch(err => {
+                alert('deu ruim')
+            });
+        } 
     }
 
     return (

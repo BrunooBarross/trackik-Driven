@@ -6,7 +6,7 @@ import GlobalCss from "../GlobalCss/GlobalCss";
 import PaginaLogin from "../PaginaLogin/PaginaLogin";
 import Cadastro from "../Cadastro/Cadastro";
 import TelaHabitos from "../Habitos/TelaHabitos";
-import Hoje from "../Hoje/Hoje";
+import PaginaHoje from "../Hoje/PaginaHoje";
 import Historico from "../Historico/Historico"
 
 
@@ -19,7 +19,7 @@ const App = () =>{
                 <Routes>
                     <Route path="/" element={<PaginaLogin />}/>
                     <Route path="/cadastro" element={<Cadastro />}/>
-                    <Route path="/hoje" element={<Hoje />}/>
+                    <Route path="/hoje" element={<PaginaHoje />}/>
                     <Route path="/habitos" element={<TelaHabitos />}/>
                     <Route path="/historico" element={<Historico />}/>
                 </Routes>

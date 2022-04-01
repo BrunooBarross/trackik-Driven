@@ -45,7 +45,7 @@ const TelaHabitos = () => {
     }
 
     const diaSemana = [
-        {idDia:7, name:"D"},
+        {idDia:0, name:"D"},
         {idDia:1, name:"S"},
         {idDia:2, name:"T"},
         {idDia:3, name:"Q"},
