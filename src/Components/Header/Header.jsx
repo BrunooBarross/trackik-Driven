@@ -27,6 +27,7 @@ const DivHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
 `
 const Logo = styled.img`
     width: 97px;

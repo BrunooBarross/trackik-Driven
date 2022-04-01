@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import UserContext from "../Contexts/UserContext"
 import { useContext } from 'react';
 import * as dayjs from 'dayjs';
+import 'dayjs/locale/pt-br'
 
 import Header from "../Header/Header";
 import Container from '../Styleds-Globais/Container';
@@ -26,7 +27,7 @@ const PaginaHoje = () =>{
             
         });
     }, [monitoraCheck,token]);
-
+    dayjs.locale('pt-br')
     return (
         <Container>
             <Header />
@@ -35,7 +36,7 @@ const PaginaHoje = () =>{
                     <h2>Nenhum hábito concluído ainda</h2>
                 </Titulo>
 
-                <>
+                <HabitosHoje>
                     {listarHoje.map((item, key) =>
                         <ListaHoje
                             key={key}
@@ -48,7 +49,7 @@ const PaginaHoje = () =>{
                             monitoraCheck={monitoraCheck}
                             setMonitoraCheck={setMonitoraCheck}
                         />)}
-                </>
+                </HabitosHoje>
             <Footer />
         </Container>
         
@@ -71,4 +72,8 @@ const Titulo = styled.div`
         line-height: 22px;
         color: #BABABA
     }
+`
+const HabitosHoje = styled.div`
+   width: 89%;
+   margin-bottom: 95px;
 `

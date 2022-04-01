@@ -43,7 +43,7 @@ function corSelecionado(dia, day) {
 
 const Div = styled.div`
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 91px;
     display: flex;
     flex-direction: column;

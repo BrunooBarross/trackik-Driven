@@ -97,7 +97,7 @@ const TelaHabitos = () => {
                 <Aviso>
                     <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span>
                 </Aviso> :
-                <>
+                <HabitosDiv>
                     {listarHabitos.map((habitos, key) =>
                         <Habitos 
                             key={key}
@@ -110,7 +110,8 @@ const TelaHabitos = () => {
                             config ={config}
                         />
                     )}
-                </>
+                    
+                </HabitosDiv>
             }
             <Footer />
         </Container>      
@@ -147,7 +148,11 @@ const Add = styled.div`
         color: #FFFFFF;
     }
 `
-
+const HabitosDiv = styled.div`
+    width: 90%;
+    height: auto;
+    padding-bottom: 90px;
+`
 const Div = styled.div`
     width: 90%;
     height: 180px;

@@ -32,8 +32,7 @@ const ListaHoje = ({id, name, done, sequencia, recorde,token,monitoraCheck,setMo
             <h2>{name}</h2>
             <Span>Sequência atual: <Sequencia sequencia={sequencia}>{sequencia} dias</Sequencia> Seu recorde:
                 <Recorde sequencia={sequencia} recorde={recorde}> {recorde} dias</Recorde>
-            </Span>
-            
+            </Span>  
         </Habito>
     );
 }
@@ -49,7 +48,7 @@ const Icone = styled.div`
 
 `
 const Habito = styled.div`
-    width: 89%;
+    width: 100%;
     height: 94px;
     position: relative;
     display: flex;
