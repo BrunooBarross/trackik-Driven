@@ -30,7 +30,10 @@ const ListaHoje = ({id, name, done, sequencia, recorde,token,monitoraCheck,setMo
         <Habito>
             <Icone done={done} onClick={()=>marcarCheck(id,done)}><ion-icon name="checkbox"></ion-icon></Icone>
             <h2>{name}</h2>
-            <span>Sequência atual: {sequencia} dias Seu recorde: {recorde} dias</span>
+            <Span>Sequência atual: <Sequencia sequencia={sequencia}>{sequencia} dias</Sequencia> Seu recorde:
+                <Recorde sequencia={sequencia} recorde={recorde}> {recorde} dias</Recorde>
+            </Span>
+            
         </Habito>
     );
 }
@@ -62,14 +65,25 @@ const Habito = styled.div`
         line-height: 25px;
         color: #666666;
     }
-    span{
-        margin-top: 7px;
-        margin-left: 15px;
-        width: 44%;
-        height: 32px;
-        font-size: 12.976px;
-        line-height: 16px;
-        color: #666666
-    }
-    
+
+   
 `
+const Span = styled.span`
+    margin-top: 7px;
+    margin-left: 15px;
+    width: 45%;
+    height: 32px;
+    font-size: 12.976px;
+    line-height: 16px;
+    color: #666666
+
+`
+const Sequencia = styled.label`
+    color: ${props => props.sequencia > 0 ? "#8FC549" : "#666666"};
+
+`
+const Recorde = styled.label`
+    color: ${props => props.sequencia = props.recorde ? "#8FC549" : "#666666"};
+
+`
+
