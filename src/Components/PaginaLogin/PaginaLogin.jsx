@@ -39,7 +39,7 @@ const PaginaLogin = ( ) =>{
 
     return(
         <ContainerLogin>
-            <Logo src="/Assets/img/logo.png" alt="logo" />
+            <Logo src="/Assets/img/logo.svg" alt="logo" />
             <Inputs onSubmit={fazerLogin}>
                 <Label>{alerta}</Label>   
                 <input type="email" name="email" placeholder='email' 

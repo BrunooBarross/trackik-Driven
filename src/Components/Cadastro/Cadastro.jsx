@@ -32,7 +32,7 @@ const Cadastro = () => {
 
     return(
         <ContainerLogin>
-            <Logo src="/Assets/img/logo.png" alt="logo" />
+            <Logo src="/Assets/img/logo.svg" alt="logo" />
             <Inputs onSubmit={cadastrarUsuario}>
                 <input type="email" name="email" placeholder='email' 
                     onChange={e => setDadosCadastro({...dadosCadastro,email: e.target.value})}required/>
