@@ -14,7 +14,7 @@ import ListaHoje from './ListaHoje';
 const PaginaHoje = () =>{
     const[listarHoje, setListarHoje] = useState([])
     const[monitoraCheck, setMonitoraCheck] = useState(false)
-    const { token, setPorcentagem } = useContext(UserContext);
+    const { token, porcentagem, setPorcentagem } = useContext(UserContext);
 
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token.token}`}}
@@ -39,9 +39,12 @@ const PaginaHoje = () =>{
                     </Aviso> 
                     :
                     <>
-                        <Titulo>
+                        <Titulo porcentagem={porcentagem}>
                             <h1>{dayjs().locale('pt-br').format('dddd, DD/MM')}</h1>
-                            <h2>Nenhum hábito concluído ainda</h2>
+                            {porcentagem === 0 ? 
+                                <h2>Nenhum hábito concluído ainda</h2>:
+                                <h2>{porcentagem}% dos hábitos concluídos</h2>
+                            }
                         </Titulo>
                         <HabitosHoje>
                             {listarHoje.map((item, key) =>
@@ -79,8 +82,9 @@ const Titulo = styled.div`
     h2{
         font-size: 17.976px;
         line-height: 22px;
-        color: #BABABA
+        color: ${props => props.porcentagem === 0 ? "#BABABA" : "#8FC549"};
     }
+    
 `
 const HabitosHoje = styled.div`
    width: 89%;

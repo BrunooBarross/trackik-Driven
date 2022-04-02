@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const Habitos = ({ id, name, day, diaSemana, listarHabitos, setListarHabitos, config }) => {
 
-    function deletarHabito(id) {
-        let dialog = window.confirm("Deseja realmente excluir esse hábito?");
+    function deletarHabito(id,name) {
+        let dialog = window.confirm(`Deseja realmente excluir o hábito ${name}?`);
         if (dialog) {
             const requisicaoDelete = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
             requisicaoDelete.then(resposta => {
@@ -20,7 +20,7 @@ const Habitos = ({ id, name, day, diaSemana, listarHabitos, setListarHabitos, co
     return (
         <Div>
             <DivFilho>
-                <img onClick={() => deletarHabito(id)} src="/Assets/img/lixeira.svg" alt="" />
+                <img onClick={() => deletarHabito(id,name)} src="/Assets/img/lixeira.svg" alt="" />
                 <span>{name}</span>
                 <div>
                     {diaSemana.map((dia, key) =>
