@@ -28,11 +28,14 @@ const ListaHoje = ({id, name, done, sequencia, recorde,token,monitoraCheck,setMo
 
     return(
         <Habito>
-            <Icone done={done} onClick={()=>marcarCheck(id,done)}><ion-icon name="checkbox"></ion-icon></Icone>
+            <Icone done={done} onClick={() => marcarCheck(id, done)}><ion-icon name="checkbox"></ion-icon></Icone>
             <h2>{name}</h2>
-            <Span>Sequência atual: <Sequencia sequencia={sequencia}>{sequencia} dias</Sequencia> Seu recorde:
-                <Recorde sequencia={sequencia} recorde={recorde}> {recorde} dias</Recorde>
-            </Span>  
+            <Span>Sequência atual: 
+                <Sequencia sequencia={sequencia}> {sequencia}
+                    {sequencia > 1 || sequencia === 0 ? " dias" : " dia"}</Sequencia> Seu recorde:
+                <Recorde sequencia={sequencia} recorde={recorde}> {recorde}
+                    {recorde > 1 || recorde === 0 ? " dias" : " dia"}</Recorde>
+            </Span>
         </Habito>
     );
 }
