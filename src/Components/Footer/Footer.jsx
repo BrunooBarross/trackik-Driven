@@ -69,4 +69,22 @@ const Div = styled.footer`
         color: #FFFFFF;
         cursor: pointer;
     }
+
+    @media (max-width: 335px){
+        div{
+            width: 70px;
+            height: 70px;
+            bottom: 25px;
+        }
+        span{
+        font-size: 14px;
+        }
+    }
+
+    @media (max-width: 266px){
+        div{
+            width: 60px;
+            height: 60px;
+        }
+    }
 `
