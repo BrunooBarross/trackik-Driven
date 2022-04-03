@@ -32,6 +32,7 @@ const TelaHabitos = () => {
         event.preventDefault();
         setLoadBotao(true);
         if(idSemana.length === 0){
+            setLoadBotao(false);
             return alert('Selecione pelo menos um dia da semana')
         }
         const requisicaoPost = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",{
