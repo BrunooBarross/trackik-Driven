@@ -47,7 +47,7 @@ const PaginaHoje = () =>{
                             <h1>{dayjs().locale('pt-br').format('dddd, DD/MM')}</h1>
                             {porcentagem === 0 ? 
                                 <h2>Nenhum hábito concluído ainda</h2>:
-                                <h2>{porcentagem}% dos hábitos concluídos</h2>
+                                <h2>{Math.round(porcentagem)}% dos hábitos concluídos</h2>
                             }
                         </Titulo>
                         <HabitosHoje>
