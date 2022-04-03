@@ -27,6 +27,7 @@ const PaginaLogin = ( ) =>{
             password: dadosLogin.senha
         });requisicaoPost.then(resposta => {
             const {data} = resposta;
+            localStorage.setItem("userToken", JSON.stringify({token:data.token, image: data.image}))
             setToken ({token:data.token, image: data.image});
             console.log(data)
             navigate('/hoje')

@@ -11,7 +11,7 @@ import Historico from "../Historico/Historico"
 
 
 const App = () =>{
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem("userToken")));
     let[porcentagem, setPorcentagem] = useState(0);
     return (
         <UserContext.Provider value={{token, setToken,porcentagem,setPorcentagem}}>
