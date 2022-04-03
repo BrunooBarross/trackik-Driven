@@ -4,6 +4,7 @@ import UserContext from "../Contexts/UserContext"
 import { useContext } from 'react';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/pt-br'
+import { BallTriangle } from 'react-loader-spinner';
 
 import Header from "../Header/Header";
 import Container from '../Styleds-Globais/Container';
@@ -14,6 +15,7 @@ import ListaHoje from './ListaHoje';
 const PaginaHoje = () =>{
     const[listarHoje, setListarHoje] = useState([])
     const[monitoraCheck, setMonitoraCheck] = useState(false)
+    const[loadingPages, setLoadingPages] = useState(true)
     const { token, porcentagem, setPorcentagem } = useContext(UserContext);
 
     useEffect(() => {
@@ -23,6 +25,7 @@ const PaginaHoje = () =>{
            const {data} = resposta;
            const realizadosDia = data.filter(item => item.done === true);
            setPorcentagem((realizadosDia.length * 100) / data.length)
+           setLoadingPages(false);
            setListarHoje(data);
         });
         requisicaoGet.catch(err => { 
@@ -33,7 +36,8 @@ const PaginaHoje = () =>{
     return (
         <Container>
             <Header />
-                { listarHoje.length ===0 ?  
+            { loadingPages ? <Load><BallTriangle  color="#126BA5" height={120} width={120}/></Load> :
+                listarHoje.length === 0 && loadingPages === false ?  
                     <Aviso>
                         <span>Você não tem nenhum hábito para realizar hoje!</span>
                     </Aviso> 
@@ -61,7 +65,7 @@ const PaginaHoje = () =>{
                                 />)}
                         </HabitosHoje>
                     </>     
-                }
+            }
             <Footer />
         </Container>
         
@@ -99,4 +103,7 @@ const Aviso = styled.div`
         line-height: 22px;
         color: #666666;
     }
+`
+const Load = styled.div`
+   margin-top: 50%;
 `

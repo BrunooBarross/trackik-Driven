@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserContext from "../Contexts/UserContext"
 import { useContext } from 'react';
-import { ThreeDots } from 'react-loader-spinner';
+import { ThreeDots, BallTriangle } from 'react-loader-spinner';
 
 import Header from "../Header/Header";
 import Container from '../Styleds-Globais/Container';
@@ -20,6 +20,7 @@ const TelaHabitos = () => {
     useEffect(() => {
         const requisicaoGet = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`,config);
         requisicaoGet.then(resposta => {
+            setLoadingPages(false)
             setListarHabitos(resposta.data)
         });
         requisicaoGet.catch(err => { 
@@ -63,6 +64,7 @@ const TelaHabitos = () => {
     const [listarHabitos, setListarHabitos] = useState([]);
     const [nomeHabito, setNomeHabito] = useState("");
     const [loadBotao, setLoadBotao] = useState(false)
+    const[loadingPages, setLoadingPages] = useState(true)
    
     function zerarInput(){
         setNomeHabito("");
@@ -103,25 +105,26 @@ const TelaHabitos = () => {
                     </DivForm>   
                 </Div>  : <></>    
             }
-            { listarHabitos.length ===0 ?  
-                <Aviso>
-                    <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span>
-                </Aviso> :
-                <HabitosDiv>
-                    {listarHabitos.map((habitos, key) =>
-                        <Habitos 
-                            key={key}
-                            id={habitos.id}
-                            name={habitos.name}
-                            day={habitos.days}
-                            diaSemana={diaSemana}
-                            listarHabitos={listarHabitos}
-                            setListarHabitos={setListarHabitos}
-                            config ={config}
-                        />
-                    )}
-                    
-                </HabitosDiv>
+            {   loadingPages ? <Load><BallTriangle  color="#126BA5" height={120} width={120}/></Load> :
+                listarHabitos.length ===0 && loadingPages === false?  
+                    <Aviso>
+                        <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span>
+                    </Aviso> :
+                    <HabitosDiv>
+                        {listarHabitos.map((habitos, key) =>
+                            <Habitos 
+                                key={key}
+                                id={habitos.id}
+                                name={habitos.name}
+                                day={habitos.days}
+                                diaSemana={diaSemana}
+                                listarHabitos={listarHabitos}
+                                setListarHabitos={setListarHabitos}
+                                config ={config}
+                            />
+                        )}
+                        
+                    </HabitosDiv>
             }
             <Footer />
         </Container>      
@@ -240,4 +243,7 @@ const Aviso = styled.div`
         line-height: 22px;
         color: #666666;
     }
+`
+const Load = styled.div`
+   margin-top: 35%;
 `

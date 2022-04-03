@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import ContainerLogin from '../Styleds-Globais/ContainerLogin';
 import Logo from '../Styleds-Globais/Logo';
 import Inputs from '../Styleds-Globais/Inputs'
-import BotaoLogin from '../Styleds-Globais/BotaoLogin';
+import BotaoLogin from './BotaoLogin';
 
 const PaginaLogin = ( ) =>{
     const navigate = useNavigate();
