@@ -11,6 +11,8 @@ const Inputs = styled.form`
         width: 77%;
         height: 45px;
         margin-top: 6px;
+        font-size: 19.976px;
+        color: #666666;
     }   
 `
 export default Inputs;

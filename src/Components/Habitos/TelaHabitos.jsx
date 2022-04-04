@@ -197,6 +197,7 @@ const DivForm = styled.form`
         font-weight: 400;
         font-size: 19.976px;
         line-height: 25px;
+        color: #666666;
     }   
 
     input::placeholder{
